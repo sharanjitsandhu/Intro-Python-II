@@ -1,4 +1,5 @@
-from room import Room
+from room import Room  # "room" is a filename & "Room" is a classname
+from player import Player
 
 # Declare all the rooms
 
@@ -33,6 +34,20 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+player = Player(room['outside'])
+
+while True:
+    insert = input("What is your command: ")
+    print("Name:", player.location.name)
+    print("Description:", player.location.description)
+    if insert == "q":
+        break
+    if insert == "e" or insert == "w" or insert == "n" or insert == "s":
+        newRoom = player.location.getRoomsDirection(insert)
+        if newRoom == None:
+            print("Wrong direction!!")
+        else:
+            player.change_location(newRoom)
 #
 # Main
 #
